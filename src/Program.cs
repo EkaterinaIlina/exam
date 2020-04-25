@@ -90,11 +90,13 @@ namespace src
                 {
                     sw.WriteLine(a.Mark + "; " + a.Model + "; " + a.Price + "; ");
                 }
+                Console.WriteLine("Сохранено");
             }
         }
         static public void Sort()
         {
-             Autos = Autos.AsQueryable<Auto>().OrderByDescending(c => c.Mark).ThenByDescending(c => c.Price).ToArray(); ;
+             Autos = Autos.AsQueryable<Auto>().OrderByDescending(c => c.Mark).ThenByDescending(c => c.Price).ToArray();
+            Console.WriteLine("Отсортировано");
         }
     }
 }
