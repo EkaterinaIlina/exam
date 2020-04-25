@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,7 @@ namespace src
                 Autos = new Auto[n];
                 FillAutos();
                 Sort();
+                SaveInFile();
                 Console.ReadKey();
             }
             catch(Exception ex)
@@ -57,7 +59,13 @@ namespace src
         }
         static public void SaveInFile()
         {
-            
+            using (StreamWriter sw = new StreamWriter("file.txt"))
+            {
+                foreach(Auto a in Autos)
+                {
+                    sw.WriteLine(a.Mark + "; " + a.Model + "; " + a.Price + "; ");
+                }
+            }
         }
         static public void Sort()
         {
