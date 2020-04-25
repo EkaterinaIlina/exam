@@ -12,6 +12,14 @@ namespace src
         private static int n;
         private static Auto[] Autos;
 
+        private static string ParseString(string input)
+        {
+            if (input == "")
+                return "Пустое значение";
+            else
+                return input;
+        }
+
         static void Main(string[] args)
         {
             try
@@ -40,20 +48,29 @@ namespace src
                 for (int i = 0; i < n; i++)
                 {
                     Autos[i] = new Auto();
-                    Console.WriteLine($"Введите марку автомобиля {0}: ", i);
-                    Autos[i].Mark = Console.ReadLine();
-                    Console.WriteLine($"Введите модель автомобиля {0}: ", i);
-                    Autos[i].Model = Console.ReadLine();
-                    Console.WriteLine($"Введите цену автомобиля {0}: ", i);
-                    string read = Console.ReadLine();
-                bool Read = read.AsEnumerable().Any(ch => char.IsLetter(ch));
-                if (!Read)
-                    Autos[i].Price = Convert.ToDecimal(read);
-                else
+                    Console.WriteLine(String.Format("Введите марку автомобиля {0}: ", i));
+                    string mark = ParseString(Console.ReadLine());
+                    Autos[i].Mark = mark;
+                    Console.WriteLine(String.Format("Введите модель автомобиля {0}: ", i));
+                    string model = ParseString(Console.ReadLine());
+                    Autos[i].Model = model;
+                    Console.WriteLine(String.Format("Введите цену автомобиля {0}: ", i));
+                bool Read;
+                do
                 {
-                    Console.WriteLine("Цена не должна содержать буквы");
+                    string read = Console.ReadLine();
+
+                    Read = read.AsEnumerable().Any(ch => char.IsLetter(ch));
+                    if (!Read)
+                        Autos[i].Price = Convert.ToDecimal(read);
+                    else
+                    {
+                        Console.WriteLine("Цена не должна содержать буквы");
+                        read = Console.ReadLine();
+                    }
                 }
-                while (Read) ;
+                while (Read);
+               
                 }
 
         }
@@ -69,7 +86,7 @@ namespace src
         }
         static public void Sort()
         {
-            Autos.OrderBy(r => r.Model).ThenBy(r => r.Price).ToArray();
+             Autos = Autos.AsQueryable<Auto>().OrderByDescending(c => c.Mark).ThenByDescending(c => c.Price).ToArray(); ;
         }
     }
 }
