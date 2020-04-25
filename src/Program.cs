@@ -49,29 +49,37 @@ namespace src
                 {
                     Autos[i] = new Auto();
                     Console.WriteLine(String.Format("Введите марку автомобиля {0}: ", i));
-                    string mark = ParseString(Console.ReadLine());
+                    string mark = (Console.ReadLine());
+                    while (string.IsNullOrEmpty(mark))
+                    {
+                    Console.WriteLine("Введите марку");
+                    mark = Console.ReadLine();
+                    }
                     Autos[i].Mark = mark;
                     Console.WriteLine(String.Format("Введите модель автомобиля {0}: ", i));
-                    string model = ParseString(Console.ReadLine());
+                    string model = Console.ReadLine();
+                    while (string.IsNullOrEmpty(model))
+                    {
+                    Console.WriteLine("Введите модель");
+                    model = Console.ReadLine();
+                    }
                     Autos[i].Model = model;
                     Console.WriteLine(String.Format("Введите цену автомобиля {0}: ", i));
-                bool Read;
-                do
-                {
-                    string read = Console.ReadLine();
-
-                    Read = read.AsEnumerable().Any(ch => char.IsLetter(ch));
-                    if (!Read)
-                        Autos[i].Price = Convert.ToDecimal(read);
-                    else
+                    string priceS = Console.ReadLine();
+                    while (string.IsNullOrEmpty(priceS))
                     {
-                        Console.WriteLine("Цена не должна содержать буквы");
-                        read = Console.ReadLine();
+                    Console.WriteLine("Введите цену");
+                    priceS = Console.ReadLine();
                     }
+                    int price;
+                    while (!Int32.TryParse(priceS, out price))
+                {
+                    Console.WriteLine("Введите целое число");
+                    priceS = Console.ReadLine();
                 }
-                while (Read);
-               
-                }
+                Autos[i].Price = price;
+                
+            }
 
         }
         static public void SaveInFile()

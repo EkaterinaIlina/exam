@@ -10,7 +10,7 @@ namespace src
     {
         string mark= "";
         string model = "";
-        decimal price = 0;
+        int price = 0;
 
         public string Mark
         {
@@ -24,7 +24,7 @@ namespace src
             set { this.model = value; }
         }
 
-        public decimal Price
+        public int Price
         {
             get { return this.price; }
             set { this.price = value; }
