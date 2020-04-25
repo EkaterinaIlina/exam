@@ -24,6 +24,7 @@ namespace src
                 }
                 Autos = new Auto[n];
                 FillAutos();
+                Sort();
                 Console.ReadKey();
             }
             catch(Exception ex)
@@ -34,7 +35,7 @@ namespace src
         }
         static private void FillAutos()
         {
-                for (int i = 0; i <= n; i++)
+                for (int i = 0; i < n; i++)
                 {
                     Autos[i] = new Auto();
                     Console.WriteLine($"Введите марку автомобиля {0}: ", i);
@@ -48,11 +49,19 @@ namespace src
                     Autos[i].Price = Convert.ToDecimal(read);
                 else
                 {
-                    Console.WriteLine("Цена не должно содержать буквы");
+                    Console.WriteLine("Цена не должна содержать буквы");
                 }
                 while (Read) ;
                 }
 
+        }
+        static public void SaveInFile()
+        {
+            
+        }
+        static public void Sort()
+        {
+            Autos.OrderBy(r => r.Model).ThenBy(r => r.Price).ToArray();
         }
     }
 }
