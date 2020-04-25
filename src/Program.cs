@@ -12,13 +12,6 @@ namespace src
         private static int n;
         private static Auto[] Autos;
 
-        private static string ParseString(string input)
-        {
-            if (input == "")
-                return "Пустое значение";
-            else
-                return input;
-        }
 
         static void Main(string[] args)
         {
